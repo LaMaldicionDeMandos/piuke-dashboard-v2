@@ -15219,6 +15219,15 @@ table.tablesorter thead tr .headerSortDown {
   height: 60px;
 }
 
+.sidebar[data="orange"],
+.off-canvas-sidebar[data="orange"] {
+  background: #c37e08;
+  background: -webkit-linear-gradient(0deg, #c37e08 0%, #f6a821 100%);
+  background: -o-linear-gradient(0deg, #c37e08 0%, #f6a821 100%);
+  background: -moz-linear-gradient(0deg, #c37e08 0%, #f6a821 100%);
+  background: linear-gradient(0deg, #c37e08 0%, #f6a821 100%);
+}
+
 .sidebar[data="blue"],
 .off-canvas-sidebar[data="blue"] {
   background: #3358f4;
