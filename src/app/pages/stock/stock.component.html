@@ -14,25 +14,29 @@
                   <th>#</th>
                   <th>Info</th>
                   <th>Stock</th>
+                  <th>Ventas</th>
                   <th>Costo</th>
+                  <th>Precio</th>
                   <th>Fecha</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor="let item of items">
                   <td>
                     <div class="image-container">
-                      <img src="https://http2.mlstatic.com/D_654782-MLA46941220496_082021-I.jpg" class="sc-list-item-row-picture__single-item">
+                      <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
                     </div>
                   </td>
                   <td class="td-name">
-                    <label>Pelota de Basquet Sports</label>
+                    <label>{{item.title}}</label>
                     <br/>
-                    <small>SKU Basket sports</small>
+                    <small>{{item.id}}</small>
                   </td>
-                  <td class="td-number">1</td>
-                  <td>{{622.25 | currency}}</td>
-                  <td>01/08/2021</td>
+                  <td class="td-number">{{item.available_quantity}}</td>
+                  <td class="td-number">{{item.sold_quantity}}</td>
+                  <td>{{item.cost | currency}}</td>
+                  <td>{{item.price | currency}}</td>
+                  <td>{{item.start_time | date}}</td>
                 </tr>
               </tbody>
             </table>
