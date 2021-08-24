@@ -15,6 +15,7 @@ import { TypographyComponent } from "../../pages/typography/typography.component
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {StockComponent} from "../../pages/stock/stock.component";
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     NgbModule,
   ],
   declarations: [
+    StockComponent,
     DashboardComponent,
     UserComponent,
     TablesComponent,
