@@ -14,6 +14,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 import {CommonModule} from "@angular/common";
+import {ItemsService} from "./services/items.service";
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import {CommonModule} from "@angular/common";
     ToastrModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [],
+  providers: [ItemsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
