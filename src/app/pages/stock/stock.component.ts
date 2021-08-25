@@ -1,18 +1,31 @@
 import { Component, OnInit } from "@angular/core";
 import {ItemsService} from "../../services/items.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: "app-stock",
   templateUrl: "stock.component.html"
 })
 export class StockComponent implements OnInit {
-  items;
+  newItem: any;
+  showNewItemForm = false;
+
+  items: Observable<any>;
 
   constructor(private itemsService: ItemsService) {}
 
   ngOnInit() {
-    this.itemsService.getStock().then(items => this.items = items);
+    this.items = this.itemsService.getStock();
+    this.items.forEach(v => {
+      console.log(`${JSON.stringify(v)}`);
+    });
   }
 
+  newProduct() {
+    this.showNewItemForm = true;
+  }
 
+  save() {
+    this.showNewItemForm = false;
+  }
 }

@@ -1,5 +1,39 @@
 
 <div class=" content">
+  <div class="row">
+    <div class="col-sm-12">
+      <button class=" btn btn-fill btn-primary float-right" (click)="newProduct()">Nuevo</button>
+    </div>
+  </div>
+
+  <div class=" row" [hidden]="!showNewItemForm">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Nuevo Producto</h4>
+        </div>
+        <div class=" card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Código</label>
+              <div class="form-group">
+                <input class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label>Costo</label>
+              <div class="form-group">
+                <input class="form-control" type="number">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=" card-footer">
+          <button class=" btn btn-fill btn-info" (click)="save()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class=" row">
     <div class=" col-md-12">
       <div class=" card">
@@ -22,7 +56,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of items">
+                <tr *ngFor="let item of items | async">
                   <td>
                     <div class="image-container">
                       <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
