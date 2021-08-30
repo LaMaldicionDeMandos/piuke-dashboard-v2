@@ -31,4 +31,9 @@ export class StockProduct {
   get stock() {
     return _.chain(this.meliItems).map('availableQuantity').min().value() || 0;
   }
+
+  get thumbnail() {
+    if (_.isEmpty(this.meliItems)) return undefined;
+    return _.head(this.meliItems).thumbnail;
+  }
 }
