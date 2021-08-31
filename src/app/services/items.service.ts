@@ -18,9 +18,16 @@ export class ItemsService {
 
   constructor(private http: HttpClient) {}
 
-  getStock(): Observable<StockProduct[]> {
-    return this.http.get(baseUrl,  {headers})
-      .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, StockProduct))));
+  getStock(): Promise<StockProduct[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get(baseUrl,  {headers})
+        .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, StockProduct))))
+        .subscribe({
+          next: items => resolve(items),
+          error: e => reject(e),
+          complete: () => console.log("Stock complete")
+        });
+    });
   }
 
   deleteItem(id: string) {

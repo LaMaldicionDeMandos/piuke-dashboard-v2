@@ -18,8 +18,7 @@ export class StockComponent implements OnInit {
   constructor(private itemsService: ItemsService) {}
 
   ngOnInit() {
-    this.itemsService.getStock()
-      .pipe(map(items => this.items = items));
+    this.itemsService.getStock().then(items => this.items = items);
   }
 
   newProduct() {
