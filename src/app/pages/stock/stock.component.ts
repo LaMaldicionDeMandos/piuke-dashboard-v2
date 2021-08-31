@@ -1,24 +1,25 @@
-import { Component, OnInit } from "@angular/core";
-import {ItemsService} from "../../services/items.service";
-import {Observable} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import {ItemsService} from '../../services/items.service';
+import {map} from 'rxjs/operators';
+import {StockProduct} from '../../models/stock.product';
+import * as _ from 'lodash';
 
 @Component({
   selector: "app-stock",
-  templateUrl: "stock.component.html"
+  templateUrl: "stock.component.html",
+  styleUrls: ['./stock.component.scss']
 })
 export class StockComponent implements OnInit {
   newItem: any;
   showNewItemForm = false;
 
-  items: Observable<any>;
+  items: StockProduct[];
 
   constructor(private itemsService: ItemsService) {}
 
   ngOnInit() {
-    this.items = this.itemsService.getStock();
-    this.items.forEach(v => {
-      console.log(`${JSON.stringify(v)}`);
-    });
+    this.itemsService.getStock()
+      .pipe(map(items => this.items = items));
   }
 
   newProduct() {
@@ -27,5 +28,10 @@ export class StockComponent implements OnInit {
 
   save() {
     this.showNewItemForm = false;
+  }
+
+  deleteProduct(product) {
+    this.itemsService.deleteItem(product.id);
+    _.remove(this.items, (item) => item === product);
   }
 }

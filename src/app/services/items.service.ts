@@ -18,12 +18,18 @@ export class ItemsService {
 
   constructor(private http: HttpClient) {}
 
-  getStock(): Observable<StockProduct> {
+  getStock(): Observable<StockProduct[]> {
     return this.http.get(baseUrl,  {headers})
-      .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, StockProduct))))
-      .pipe(map(v => {
-        console.log(`value: ${JSON.stringify(v)}`)
-        return v;
-      }));
+      .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, StockProduct))));
+  }
+
+  deleteItem(id: string) {
+    console.log('Deleting ' + id);
+    return this.http.delete(`${baseUrl}/${id}`, {headers}).subscribe(
+      {
+        next: (value) => console.log('Next'),
+        error: (e) => console.log('Error ' + JSON.stringify(e)),
+        complete: () => console.log('Complete')
+      });
   }
 }

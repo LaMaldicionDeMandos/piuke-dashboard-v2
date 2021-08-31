@@ -2,8 +2,14 @@ import { JsonObject, JsonProperty, Any } from 'json2typescript';
 import {DateConverter} from './date.converter';
 import * as _ from 'lodash';
 
+export enum ListingType {
+  PRO = 'gold_pro',
+  NORMAL = 'gold_special'
+}
+
 @JsonObject("StockMeliProduct")
 export class StockMeliProduct {
+  @JsonProperty('id', String) id: string = undefined;
   @JsonProperty('title', String) title: string = undefined;
   @JsonProperty('price', Number) price: number = undefined;
   @JsonProperty('available_quantity', Number) availableQuantity: number = undefined;
@@ -11,6 +17,7 @@ export class StockMeliProduct {
   @JsonProperty('start_time', DateConverter) startTime: Date = undefined;
   @JsonProperty('thumbnail', String) thumbnail: string = undefined;
   @JsonProperty('status', String) status: string = undefined;
+  @JsonProperty('listing_type_id', String) listingType: ListingType = undefined;
 
   constructor() { }
 
@@ -18,6 +25,7 @@ export class StockMeliProduct {
 
 @JsonObject("StockProduct")
 export class StockProduct {
+  @JsonProperty('_id', String) id: string = undefined;
   @JsonProperty('cost', Number) cost: number = undefined;
   @JsonProperty('code', String) code: string = undefined;
   @JsonProperty('meli_items', [StockMeliProduct]) meliItems: StockMeliProduct = undefined;
@@ -35,5 +43,10 @@ export class StockProduct {
   get thumbnail() {
     if (_.isEmpty(this.meliItems)) return undefined;
     return _.head(this.meliItems).thumbnail;
+  }
+
+  get title() {
+    if (_.isEmpty(this.meliItems)) return undefined;
+    return _.head(this.meliItems).title;
   }
 }
