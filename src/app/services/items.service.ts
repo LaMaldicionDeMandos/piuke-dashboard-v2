@@ -32,17 +32,13 @@ export class ItemsService {
 
   syncItem(code: string): Promise<StockProduct> {
     return new Promise((resolve, reject) => {
-      setTimeout(() => resolve(null), 2000);
-      /*
-      this.http.post(baseUrl + `/sync/${code}`,  {headers})
+      this.http.get(baseUrl + `/sync/${code}`,  {headers})
         .pipe(map(item => jsonConvert.deserializeObject(item, StockProduct)))
         .subscribe({
           next: item => resolve(item),
           error: e => reject(e),
           complete: () => console.log("Sync complete")
         });
-
-       */
     });
   }
 
