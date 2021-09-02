@@ -28,7 +28,7 @@ export class StockProduct {
   @JsonProperty('_id', String) id: string = undefined;
   @JsonProperty('cost', Number) cost: number = undefined;
   @JsonProperty('code', String) code: string = undefined;
-  @JsonProperty('meli_items', [StockMeliProduct]) meliItems: StockMeliProduct = undefined;
+  @JsonProperty('meli_items', [StockMeliProduct], true) meliItems: StockMeliProduct[] = [];
 
   constructor() { }
 

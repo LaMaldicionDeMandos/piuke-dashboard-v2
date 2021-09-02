@@ -18,6 +18,18 @@ export class ItemsService {
 
   constructor(private http: HttpClient) {}
 
+  newItem(item):Promise<StockProduct> {
+    return new Promise((resolve, reject) => {
+      this.http.post(baseUrl, item, {headers})
+        .pipe(map(item => jsonConvert.deserializeObject(item, StockProduct)))
+        .subscribe({
+          next: item => resolve(item),
+          error: e => reject(e),
+          complete: () => console.log("Creation complete")
+        });
+    });
+  }
+
   getStock(): Promise<StockProduct[]> {
     return new Promise((resolve, reject) => {
       this.http.get(baseUrl,  {headers})
