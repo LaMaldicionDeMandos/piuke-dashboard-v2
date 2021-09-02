@@ -63,4 +63,16 @@ export class ItemsService {
         complete: () => console.log('Complete')
       });
   }
+
+  update(code, change) {
+    return new Promise((resolve, reject) => {
+      this.http.patch(baseUrl + `/${code}`, change, {headers})
+        .pipe(map(item => jsonConvert.deserializeObject(item, StockProduct)))
+        .subscribe({
+          next: item => resolve(item),
+          error: e => reject(e),
+          complete: () => console.log("Creation complete")
+        });
+    });
+  }
 }

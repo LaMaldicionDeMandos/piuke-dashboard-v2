@@ -50,6 +50,16 @@ export class StockComponent implements OnInit {
     _.remove(this.items, (item) => item === product);
   }
 
+  changeCost(item) {
+    item['changeCost'] = true;
+  }
+
+  doChangeCost(item) {
+    delete item.changeCost;
+    this.itemsService.update(item.code, {cost: item.cost})
+      .catch(e => console.log("Hubo un error!" + JSON.stringify(e)));
+  }
+
   @startLoadingIndicator()
   syncItem(product) {
     this.itemsService.syncItem(product.code)

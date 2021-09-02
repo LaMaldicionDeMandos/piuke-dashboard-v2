@@ -70,7 +70,17 @@
                   </td>
                   <td class="td-number">{{item.stock}}</td>
                   <td class="td-number">{{item.sales}}</td>
-                  <td>{{item.cost | currency}}</td>
+                  <td>
+                    <div [ngSwitch]="item.changeCost">
+                      <span *ngSwitchCase="undefined">
+                        <span >{{item.cost | currency}}</span>
+                        <button class="btn-sm btn-link btn-icon btn-simple btn-simple-link btn-success" (click)="changeCost(item)">
+                          <i class=" tim-icons icon-pencil"></i>
+                        </button>
+                      </span>
+                      <input *ngSwitchCase="true" style="max-width: 92px" class="form-control" type="number" [(ngModel)]="item.cost" (keyup.enter)="doChangeCost(item)">
+                    </div>
+                  </td>
                   <td>
                     <div>
                       <div class="row" *ngFor="let meliItem of item.meliItems">
