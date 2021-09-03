@@ -16,6 +16,15 @@ export class StockComponent implements OnInit {
 
   items: StockProduct[];
 
+  sorters = [
+    { label: 'Nombre', fun: (items) => _.sortBy(items, ['title'])},
+    { label: 'Ventas', fun: (items) => _.orderBy(items, ['sales'], ['desc'])},
+    { label: 'Stock', fun: (items) => _.orderBy(items, ['stock'], ['desc'])},
+    { label: 'Calidad', fun: (items) => _.orderBy(items, ['health'], ['desc'])}
+    ];
+
+  currentSorter: any;
+
   constructor(private itemsService: ItemsService) {}
 
   ngOnInit() {
@@ -58,6 +67,11 @@ export class StockComponent implements OnInit {
     delete item.changeCost;
     this.itemsService.update(item.code, {cost: item.cost})
       .catch(e => console.log("Hubo un error!" + JSON.stringify(e)));
+  }
+
+  sort(sorter) {
+    this.items = sorter.fun(this.items);
+    this.currentSorter = sorter;
   }
 
   @startLoadingIndicator()

@@ -13,6 +13,21 @@
   color: #f6a821 !important;
 }
 
+.zmdi {
+  padding-right: 8px;
+  color: #f6a821;
+}
+
+.zmdi.action-icon {
+  padding-right: 8px;
+  color: #00f2c3 !important;
+}
+
+.btn.dropdown-toggle[data-toggle=dropdown]:after {
+  content: "";
+  margin-left: 5px !important;
+}
+
 .little-text {
   font-size: 10px;
 }
