@@ -52,11 +52,13 @@ export class StockProduct {
   }
 
   get health() {
-    const l = _.reduce(this.meliItems, (sum, item) => {
+    const l = _.chain(this.meliItems)
+      .reject((item) => isNaN(item.health))
+      .reduce((sum, item) => {
       sum.value+= item.health;
       sum.count++;
       return sum;
-    }, {value: 0, count: 0});
+    }, {value: 0, count: 0}).value();
     return l.value/l.count;
   }
 }

@@ -114,7 +114,7 @@
                     <div class="row" *ngFor="let meliItem of item.meliItems">{{meliItem.status}}</div>
                   </td>
                   <td>
-                    {{item.health}}
+                    <span class="success">{{item.health*100}}%</span>
                   </td>
                   <td>
                     <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="syncItem(item)"><i class=" zmdi zmdi-refresh-alt action-icon"></i></button>

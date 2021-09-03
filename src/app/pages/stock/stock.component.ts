@@ -20,7 +20,8 @@ export class StockComponent implements OnInit {
     { label: 'Nombre', fun: (items) => _.sortBy(items, ['title'])},
     { label: 'Ventas', fun: (items) => _.orderBy(items, ['sales'], ['desc'])},
     { label: 'Stock', fun: (items) => _.orderBy(items, ['stock'], ['desc'])},
-    { label: 'Calidad', fun: (items) => _.orderBy(items, ['health'], ['desc'])}
+    { label: 'Mayor Calidad', fun: (items) => _.orderBy(items, ['health'], ['desc'])},
+    { label: 'Menor Calidad', fun: (items) => _.orderBy(items, ['health'], ['asc'])}
     ];
 
   currentSorter: any;
