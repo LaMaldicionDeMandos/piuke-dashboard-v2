@@ -56,13 +56,14 @@
                   <th>#</th>
                   <th>Info</th>
                   <th>Stock</th>
-                  <th>Ventas</th>
                   <th>Costo</th>
                   <th>Precio</th>
                   <th>Beneficio</th>
                   <th>Estado</th>
                   <th>Calidad</th>
+                  <th>Ventas</th>
                   <th>Preguntas</th>
+                  <th>Visitas</th>
                   <th>Acción</th>
                 </tr>
               </thead>
@@ -79,7 +80,6 @@
                     <small>{{item.code}}</small>
                   </td>
                   <td class="td-number">{{item.stock}}</td>
-                  <td class="td-number">{{item.sales}}</td>
                   <td class="td-number">
                     <div [ngSwitch]="item.changeCost">
                       <span *ngSwitchCase="undefined">
@@ -117,7 +117,9 @@
                   <td class="td-center">
                     <span class="success">{{item.health*100}}%</span>
                   </td>
+                  <td class="td-number">{{item.sales}}</td>
                   <td class="td-number">{{item.questions}}</td>
+                  <td class="td-number">{{item.visits}}</td>
                   <td>
                     <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="syncItem(item)"><i class=" zmdi zmdi-refresh-alt action-icon"></i></button>
                     <button class="btn-sm btn-danger btn-link btn-icon btn-simple" (click)="deleteProduct(item)"><i class=" tim-icons icon-trash-simple"></i></button>
