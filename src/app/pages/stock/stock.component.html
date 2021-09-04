@@ -62,6 +62,7 @@
                   <th>Beneficio</th>
                   <th>Estado</th>
                   <th>Calidad</th>
+                  <th>Preguntas</th>
                   <th>Acción</th>
                 </tr>
               </thead>
@@ -72,14 +73,14 @@
                       <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
                     </div>
                   </td>
-                  <td class="td-name">
+                  <td class="td-name td-large">
                     <label>{{item.title}}</label>
                     <br/>
                     <small>{{item.code}}</small>
                   </td>
                   <td class="td-number">{{item.stock}}</td>
                   <td class="td-number">{{item.sales}}</td>
-                  <td>
+                  <td class="td-number">
                     <div [ngSwitch]="item.changeCost">
                       <span *ngSwitchCase="undefined">
                         <span >{{item.cost | currency}}</span>
@@ -90,16 +91,16 @@
                       <input *ngSwitchCase="true" style="max-width: 92px" class="form-control" type="number" [(ngModel)]="item.cost" (keyup.enter)="doChangeCost(item)">
                     </div>
                   </td>
-                  <td>
+                  <td class="td-number">
                     <div>
                       <div class="row" *ngFor="let meliItem of item.meliItems">
                         <!--<embed src="assets/img/cup.svg" class="ui-search-icon ui-search-icon-loyalty"/>-->
                         {{meliItem.price | currency}}</div>
                     </div>
                   </td>
-                  <td>
+                  <td class="td-large td-center">
                     <div>
-                      <div class="row" *ngFor="let meliItem of item.meliItems" [ngSwitch]="meliItem.listingType">
+                      <div class="row td-center" *ngFor="let meliItem of item.meliItems" [ngSwitch]="meliItem.listingType">
                         <span *ngSwitchCase="'gold_pro'">
                           <i class=" tim-icons icon-credit-card" style="margin-right: 5px"> </i>
                           <span class="little-text" >Cuotas sin Interes</span>
@@ -110,12 +111,13 @@
                       </div>
                     </div>
                   </td>
-                  <td>
+                  <td class="td-center">
                     <div class="row" *ngFor="let meliItem of item.meliItems">{{meliItem.status}}</div>
                   </td>
-                  <td>
+                  <td class="td-center">
                     <span class="success">{{item.health*100}}%</span>
                   </td>
+                  <td class="td-number">{{item.questions}}</td>
                   <td>
                     <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="syncItem(item)"><i class=" zmdi zmdi-refresh-alt action-icon"></i></button>
                     <button class="btn-sm btn-danger btn-link btn-icon btn-simple" (click)="deleteProduct(item)"><i class=" tim-icons icon-trash-simple"></i></button>

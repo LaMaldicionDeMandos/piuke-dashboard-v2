@@ -19,6 +19,7 @@ export class StockMeliProduct {
   @JsonProperty('status', String) status: string = undefined;
   @JsonProperty('listing_type_id', String) listingType: ListingType = undefined;
   @JsonProperty('health', Number, true) health: number = undefined;
+  @JsonProperty('questions', Number) questions: number = undefined;
 
   constructor() { }
 
@@ -60,5 +61,9 @@ export class StockProduct {
       return sum;
     }, {value: 0, count: 0}).value();
     return l.value/l.count;
+  }
+
+  get questions() {
+    return _.reduce(this.meliItems, (sum, item) => sum + item.questions, 0);
   }
 }
