@@ -8,11 +8,12 @@ import { UserComponent } from "../../pages/user/user.component";
 import { TablesComponent } from "../../pages/tables/tables.component";
 import { TypographyComponent } from "../../pages/typography/typography.component";
 import {StockComponent} from "../../pages/stock/stock.component";
-// import { RtlComponent } from "../../pages/rtl/rtl.component";
+import {SaleComponent} from "../../pages/sale/sale.component";
 
 export const AdminLayoutRoutes: Routes = [
   { path: "", redirectTo: "stock" },
   { path: "stock", component: StockComponent },
+  { path: "sales", component: SaleComponent },
   /*
   { path: "icons", component: IconsComponent },
   { path: "maps", component: MapComponent },

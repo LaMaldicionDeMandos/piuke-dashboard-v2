@@ -14,7 +14,14 @@ export const ROUTES: RouteInfo[] = [
     rtlTitle: "",
     icon: "icon-app",
     class: ""
-  }
+  },
+  {
+    path: "/sales",
+    title: "Ventas",
+    rtlTitle: "",
+    icon: "icon-tag",
+    class: ""
+  },
 ];
 
 @Component({

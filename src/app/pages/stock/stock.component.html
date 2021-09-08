@@ -80,7 +80,7 @@
                     <small>{{item.code}}</small>
                   </td>
                   <td class="td-number">{{item.stock}}</td>
-                  <td class="td-number">
+                  <td class="td-number td-large">
                     <div [ngSwitch]="item.changeCost">
                       <span *ngSwitchCase="undefined">
                         <span >{{item.cost | currency}}</span>
