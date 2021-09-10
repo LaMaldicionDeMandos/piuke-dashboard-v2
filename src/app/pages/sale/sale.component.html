@@ -8,9 +8,12 @@
         </div>
         <div class=" card-body">
           <label>Month Picker</label>
-          <input [matDatepicker]="picker1" placeholder="Angular forms" [(ngModel)]="startDate" class="form-control">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
+          <div class="col-md-4">
+            <input [matDatepicker]="picker1" placeholder="Angular forms" [(ngModel)]="startDate" class="form-control date-Input">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </div>
+
           <div class=" table-responsive">
             <table class=" table tablesorter" id="">
               <thead class=" text-primary">
