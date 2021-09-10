@@ -1,8 +1,58 @@
 
 <div class=" content">
-  <div class="row">
-    <div class="col-sm-12">
-      <label>Ventas!!</label>
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Ventas</h4>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+              <tr>
+                <th>#</th>
+                <th>Info</th>
+                <th>Costo</th>
+                <th>Venta</th>
+                <th>Comisiones</th>
+                <th>Integro</th>
+                <th>Ganancia</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sale of sales">
+                  <td>
+                    <div class="image-container">
+                      <img src="{{sale.photo}}" class="sc-list-item-row-picture__single-item">
+                    </div>
+                  </td>
+                  <td class="td-name td-large">
+                    <label>{{sale.title}}</label>
+                    <br/>
+                    <small>{{sale.date | date:'dd/MM/YYYY HH:mm'}}</small>
+                  </td>
+                  <td class="td-number">
+                    {{sale.cost | currency}}
+                  </td>
+                  <td class="td-number">
+                    {{sale.price | currency}}
+                  </td>
+                  <td class="td-number">
+                    {{sale.fees | currency}}
+                  </td>
+                  <td class="td-number">
+                    {{sale.refill | currency}}
+                  </td>
+                  <td class="td-number">
+                    {{sale.profit | currency}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

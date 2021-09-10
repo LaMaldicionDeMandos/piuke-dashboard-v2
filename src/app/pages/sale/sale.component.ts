@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { startLoadingIndicator, stopLoadingIndicator } from '@btapai/ng-loading-indicator';
+import {SalesService} from "../../services/sales.service";
+import {FlattenSale, Sale} from "../../models/sale";
 import * as _ from 'lodash';
 
 @Component({
@@ -8,9 +9,14 @@ import * as _ from 'lodash';
   styleUrls: ['./sale.component.scss']
 })
 export class SaleComponent implements OnInit {
-  currentSorter: any;
 
-  constructor() {}
+  sales: FlattenSale[];
+
+  constructor(private salesService: SalesService) {
+    this.salesService.getSales()
+      .then(sales => _.reduce(sales, (s, sale) => _.concat(s, sale.saleItems), []))
+      .then(sales => this.sales = sales);
+  }
 
   ngOnInit() {}
 

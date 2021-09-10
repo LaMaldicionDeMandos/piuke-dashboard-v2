@@ -36,6 +36,10 @@ export class SaleItem {
 
   constructor() { }
 
+  get saleMeliItem(): SaleMeliItem {
+    return _.head(this.meliItem);
+  }
+
 }
 
 @JsonObject("SaleOrder")
@@ -49,6 +53,9 @@ export class SaleOrder {
 
   constructor() { }
 
+  get meliItem() {
+    return this.item.saleMeliItem;
+  }
 }
 
 @JsonObject("Buyer")
@@ -70,4 +77,53 @@ export class Sale {
 
   constructor() { }
 
+  get payment(): SalePayment {
+    return _.head(this.payments);
+  }
+
+  get date(): Date {
+    return this.payment.date;
+  }
+
+  get saleItems(): FlattenSale[] {
+    return _.map(this.orders, (order) => new FlattenSale(order, this.payment));
+  }
+}
+
+@JsonObject("FlattenSale")
+export class FlattenSale {
+  constructor(private order: SaleOrder, private payment: SalePayment) { }
+
+  get photo() {
+    return this.order.meliItem.thumbnail;
+  }
+
+  get date(): Date {
+    return this.payment.date;
+  }
+
+  get title(): string {
+    return this.order.item.title;
+  }
+
+  get cost(): number {
+    return this.order.item.cost;
+  }
+
+  get price(): number {
+    return this.order.fullUnitPrice;
+  }
+
+  get fees(): number {
+    const sheepingFee = this.payment.shippingFee - (this.payment.totalPaid - this.payment.transactionAmount);
+    return this.order.saleFee + sheepingFee;
+  }
+
+  get refill(): number {
+    return this.price - this.fees;
+  }
+
+  get profit(): number {
+    return this.refill - this.cost;
+  }
 }

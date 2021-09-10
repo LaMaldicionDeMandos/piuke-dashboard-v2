@@ -16,6 +16,7 @@ import { ComponentsModule } from "./components/components.module";
 import {CommonModule} from "@angular/common";
 import {ItemsService} from "./services/items.service";
 import { LoadingIndicatorModule, LOADING_INDICATOR_CONFIG, EllipsisComponent} from '@btapai/ng-loading-indicator';
+import {SalesService} from "./services/sales.service";
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { LoadingIndicatorModule, LOADING_INDICATOR_CONFIG, EllipsisComponent} fr
     LoadingIndicatorModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [ItemsService, {provide: LOADING_INDICATOR_CONFIG, useValue: { color: '#f6a821',size: 160, indicatorComponent: EllipsisComponent }
+  providers: [ItemsService, SalesService, {provide: LOADING_INDICATOR_CONFIG, useValue: { color: '#f6a821',size: 160, indicatorComponent: EllipsisComponent }
   }],
   bootstrap: [AppComponent]
 })
