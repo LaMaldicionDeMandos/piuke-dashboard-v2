@@ -9,7 +9,7 @@ import * as _ from 'lodash';
   styleUrls: ['./sale.component.scss']
 })
 export class SaleComponent implements OnInit {
-
+  startDate = new Date(1990, 0, 1);
   sales: FlattenSale[];
 
   constructor(private salesService: SalesService) {

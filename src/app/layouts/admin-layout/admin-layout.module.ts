@@ -15,6 +15,10 @@ import { TypographyComponent } from "../../pages/typography/typography.component
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatFormFieldModule} from "@angular/material/form-field";
+
 import {StockComponent} from "../../pages/stock/stock.component";
 import {SaleComponent} from "../../pages/sale/sale.component";
 
@@ -25,6 +29,9 @@ import {SaleComponent} from "../../pages/sale/sale.component";
     FormsModule,
     HttpClientModule,
     NgbModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatDatepickerModule
   ],
   declarations: [
     StockComponent,
@@ -35,8 +42,11 @@ import {SaleComponent} from "../../pages/sale/sale.component";
     IconsComponent,
     TypographyComponent,
     NotificationsComponent,
-    MapComponent,
+    MapComponent
     // RtlComponent
-  ]
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'es-AR'},
+    ],
 })
 export class AdminLayoutModule {}
