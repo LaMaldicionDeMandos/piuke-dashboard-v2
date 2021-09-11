@@ -9,9 +9,9 @@
         <div class=" card-body">
           <label>Month Picker</label>
           <div class="col-md-4">
-            <input [matDatepicker]="picker1" placeholder="Angular forms" [(ngModel)]="startDate" class="form-control date-Input">
+            <input [matDatepicker]="picker1" placeholder="Mes" [(ngModel)]="startDate" class="form-control date-Input">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
+            <mat-datepicker #picker1 startView="multi-year" (monthSelected)="closeDatePicker($event, picker1)"></mat-datepicker>
           </div>
 
           <div class=" table-responsive">

@@ -9,15 +9,26 @@ import * as _ from 'lodash';
   styleUrls: ['./sale.component.scss']
 })
 export class SaleComponent implements OnInit {
-  startDate = new Date(1990, 0, 1);
+  startDate = new Date();
   sales: FlattenSale[];
 
   constructor(private salesService: SalesService) {
-    this.salesService.getSales()
+    this.getSales(this.startDate);
+  }
+
+  ngOnInit() {}
+
+  private getSales(date) {
+    this.salesService.getSales(date.getFullYear(), date.getMonth() + 1)
       .then(sales => _.reduce(sales, (s, sale) => _.concat(s, sale.saleItems), []))
       .then(sales => this.sales = sales);
   }
 
-  ngOnInit() {}
+  closeDatePicker(eventData: any, dp?:any) {
+    console.log("Data: " + eventData);
+    this.startDate = eventData;
+    this.getSales(this.startDate);
+    dp.close();
+  }
 
 }

@@ -17,9 +17,9 @@ export class SalesService {
 
   constructor(private http: HttpClient) {}
 
-  getSales(): Promise<Sale[]> {
+  getSales(year: number, month: number): Promise<Sale[]> {
     return new Promise((resolve, reject) => {
-      this.http.get(baseUrl,  {headers})
+      this.http.get(baseUrl + `/${year}/${month}`,  {headers})
         .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, Sale))))
         .subscribe({
           next: items => resolve(items),
