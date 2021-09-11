@@ -21,6 +21,7 @@ export class SaleComponent implements OnInit {
   private getSales(date) {
     this.salesService.getSales(date.getFullYear(), date.getMonth() + 1)
       .then(sales => _.reduce(sales, (s, sale) => _.concat(s, sale.saleItems), []))
+      .then(_.reverse)
       .then(sales => this.sales = sales);
   }
 

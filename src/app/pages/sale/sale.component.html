@@ -7,8 +7,8 @@
           <h4 class=" card-title">Ventas</h4>
         </div>
         <div class=" card-body">
-          <label>Month Picker</label>
-          <div class="col-md-4">
+          <label>Filtrar por Mes</label>
+          <div class="col-md-3">
             <input [matDatepicker]="picker1" placeholder="Mes" [(ngModel)]="startDate" class="form-control date-Input">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1 startView="multi-year" (monthSelected)="closeDatePicker($event, picker1)"></mat-datepicker>
