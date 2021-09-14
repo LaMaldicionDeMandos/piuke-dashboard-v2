@@ -21,6 +21,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 
 import {StockComponent} from "../../pages/stock/stock.component";
 import {SaleComponent} from "../../pages/sale/sale.component";
+import {BalanceComponent} from "../../pages/balance/balance.component";
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import {SaleComponent} from "../../pages/sale/sale.component";
   declarations: [
     StockComponent,
     SaleComponent,
+    BalanceComponent,
     DashboardComponent,
     UserComponent,
     TablesComponent,
