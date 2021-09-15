@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {startLoadingIndicator, stopLoadingIndicator} from "@btapai/ng-loading-indicator";
+import {ExpensesService} from "../../services/expenses.service";
+import * as _ from 'lodash';
 
 const emptyExpense = () => { return {desc: '', value: undefined}};
 
@@ -12,9 +14,11 @@ export class ExpensesComponent implements OnInit {
   newItem: any = emptyExpense();
   showNewExpenseForm = false;
   startDate = new Date();
-  expenses = [{date: new Date(), desc: 'Cinta de embalar', value: 232.17}];
+  expenses;
 
-  constructor() {}
+  constructor(private expensesService: ExpensesService) {
+    this.getExpenses(this.startDate);
+  }
 
   ngOnInit() {}
 
@@ -30,6 +34,15 @@ export class ExpensesComponent implements OnInit {
         this.triggerLoadingIndicatorStop();
         this.newItem = emptyExpense();
       });
+  }
+
+  @startLoadingIndicator()
+  private getExpenses(date) {
+    this.expensesService.getExpenses(date.getFullYear(), date.getMonth() + 1)
+      .then(_.reverse)
+      .then(expenses => this.expenses = expenses)
+      .then(this.triggerLoadingIndicatorStop)
+      .catch(this.triggerLoadingIndicatorStop)
   }
 
   @stopLoadingIndicator()

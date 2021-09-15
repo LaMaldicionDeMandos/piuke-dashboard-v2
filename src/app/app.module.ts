@@ -18,6 +18,7 @@ import {ItemsService} from "./services/items.service";
 import { LoadingIndicatorModule, LOADING_INDICATOR_CONFIG, EllipsisComponent} from '@btapai/ng-loading-indicator';
 import {SalesService} from "./services/sales.service";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {ExpensesService} from "./services/expenses.service";
 
 @NgModule({
   imports: [
@@ -33,7 +34,7 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
     LoadingIndicatorModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
-  providers: [ItemsService, SalesService,
+  providers: [ItemsService, SalesService, ExpensesService,
    // {provide: MAT_DATE_LOCALE, useValue: 'es-AR'},
     {provide: LOADING_INDICATOR_CONFIG, useValue: { color: '#f6a821',size: 160, indicatorComponent: EllipsisComponent }
   }],
