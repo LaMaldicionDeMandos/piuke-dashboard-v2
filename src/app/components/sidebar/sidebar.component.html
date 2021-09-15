@@ -15,20 +15,20 @@
       *ngFor="let menuItem of menuItems; let i = index" [class.navigation__sub]="menuItem.sub"
       class="{{ menuItem.class }} nav-item">
       <a *ngIf="!menuItem.sub"  [routerLink]="[menuItem.path]" >
-        <i class="tim-icons  {{ menuItem.icon }}"></i>
+        <i class="{{ menuItem.icon }}"></i>
         <p>{{ menuItem.title }}</p>
       </a>
       <a *ngIf="menuItem.sub" data-toggle="collapse"
          [attr.aria-expanded]="menuItem.expanded"
          aria-controls="{{menuItem.title}}" (click)="toggleSubMenu(menuItem)" >
-        <i class="tim-icons  {{ menuItem.icon }}"></i>
+        <i class="{{ menuItem.icon }}"></i>
         <p>{{ menuItem.title }}<b class="caret"></b></p>
       </a>
       <div class="collapse{{(menuItem.expanded ? '.show' : '')}}" id="{{menuItem.title}}" [collapse]="!menuItem.expanded" [isAnimated]="true">
         <ul class="nav nav-sub">
           <li *ngFor="let subMenuItem of menuItem.sub; let i = index" class="{{ menuItem.class }} nav-item" routerLinkActive="active">
             <a [routerLink]="[subMenuItem.path]" >
-              <i class="tim-icons  {{ subMenuItem.icon }}"></i>
+              <i class=" {{ subMenuItem.icon }}"></i>
               <p>{{ subMenuItem.title }}</p>
             </a>
           </li>

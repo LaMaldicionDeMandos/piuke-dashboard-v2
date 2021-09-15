@@ -22,6 +22,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {StockComponent} from "../../pages/stock/stock.component";
 import {SaleComponent} from "../../pages/sale/sale.component";
 import {BalanceComponent} from "../../pages/balance/balance.component";
+import {ExpensesComponent} from "../../pages/expenses/expenses.component";
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import {BalanceComponent} from "../../pages/balance/balance.component";
     StockComponent,
     SaleComponent,
     BalanceComponent,
+    ExpensesComponent,
     DashboardComponent,
     UserComponent,
     TablesComponent,

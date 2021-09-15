@@ -11,23 +11,23 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   {
     path: "/stock",
-    title: "Stock",
-    icon: "icon-app",
+    title: "Juguetes",
+    icon: "zmdi zmdi-toys",
     class: ""
   },
   {
     path: "/sales",
     title: "Ventas",
-    icon: "icon-tag",
+    icon: "zmdi zmdi-shopping-basket",
     class: ""
   },
   {
     title: 'Balance',
-    icon: "icon-chart-pie-36",
+    icon: "tim-icons icon-chart-pie-36",
     path: "/balance",
     sub: [
-      {title: 'Gastos', path: '/costs'},
-      {title: 'Saldos', path: '/balance'}
+      {title: 'Gastos', path: '/expenses', icon: 'zmdi zmdi-money-box'},
+      {title: 'Saldos', path: '/balance', icon: 'zmdi zmdi-balance-wallet'}
     ]
   }
 ];

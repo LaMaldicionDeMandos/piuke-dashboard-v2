@@ -8,5 +8,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "", redirectTo: "stock" },
   { path: "stock", component: StockComponent },
   { path: "sales", component: SaleComponent },
+  { path: "expenses", component: SaleComponent },
   { path: "balance", component: BalanceComponent }
 ];
