@@ -32,8 +32,12 @@ export class StockComponent implements OnInit {
     this.getProducts();
   }
 
+  @startLoadingIndicator()
   getProducts() {
-    this.itemsService.getStock().then(items => this.items = items);
+    this.itemsService.getStock()
+      .then(items => this.items = items)
+      .then(this.triggerLoadingIndicatorStop)
+      .catch(this.triggerLoadingIndicatorStop)
   }
 
   newProduct() {
@@ -78,9 +82,9 @@ export class StockComponent implements OnInit {
   @startLoadingIndicator()
   syncItem(product) {
     this.itemsService.syncItem(product.code)
-      .then(item => this.getProducts())
-      .then(items => this.triggerLoadingIndicatorStop())
-      .catch(() => this.triggerLoadingIndicatorStop());
+      .then(this.getProducts)
+      .then(this.triggerLoadingIndicatorStop)
+      .catch(this.triggerLoadingIndicatorStop);
   }
 
   @stopLoadingIndicator()

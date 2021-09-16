@@ -67,7 +67,7 @@
               <tbody>
               <tr *ngFor="let expense of expenses">
                 <td class="td-name">
-                  {{expense.date | date:'dd/MM/YYYY HH:mm'}}
+                  {{expense.createdAt | date:'dd/MM/YYYY HH:mm'}}
                 </td>
                 <td class="td-name td-large">
                   {{expense.desc}}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SalesService} from "../../services/sales.service";
 import {FlattenSale, Sale} from "../../models/sale";
 import * as _ from 'lodash';
+import {startLoadingIndicator, stopLoadingIndicator} from "@btapai/ng-loading-indicator";
 
 @Component({
   selector: "app-sale",
@@ -22,6 +23,7 @@ export class SaleComponent implements OnInit {
 
   ngOnInit() {}
 
+  @startLoadingIndicator()
   private getSales(date) {
     this.salesService.getSales(date.getFullYear(), date.getMonth() + 1)
       .then(sales => _.reduce(sales, (s, sale) => _.concat(s, sale.saleItems), []))
@@ -36,7 +38,9 @@ export class SaleComponent implements OnInit {
           this.netSales+= sale.refill;
           this.profits+= sale.profit;
         });
-      });
+      })
+      .then(this.triggerLoadingIndicatorStop)
+      .catch(this.triggerLoadingIndicatorStop);
   }
 
   closeDatePicker(eventData: any, dp?:any) {
@@ -44,6 +48,11 @@ export class SaleComponent implements OnInit {
     this.startDate = eventData;
     this.getSales(this.startDate);
     dp.close();
+  }
+
+  @stopLoadingIndicator()
+  triggerLoadingIndicatorStop() {
+    console.log('stopped');
   }
 
 }
