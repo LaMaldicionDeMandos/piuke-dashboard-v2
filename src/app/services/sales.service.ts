@@ -29,4 +29,16 @@ export class SalesService {
     });
   }
 
+  getSummary(year: number, month: number): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this.http.get(baseUrl + `/${year}/${month}/summary`,  {headers})
+        .pipe(map((item: any) => item.summary))
+        .subscribe({
+          next: summary => resolve(summary),
+          error: e => reject(e),
+          complete: () => console.log("Sales complete")
+        });
+    });
+  }
+
 }

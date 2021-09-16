@@ -12,9 +12,7 @@ export class BalanceService {
   }
 
   getSales(year: number, month: number): Promise<number> {
-    return new Promise((resolve, reject) => {
-      resolve(308.18);
-    });
+    return this.salesService.getSummary(year, month);
   }
 
 }
