@@ -27,7 +27,8 @@ export const ROUTES: RouteInfo[] = [
     path: "/balance",
     sub: [
       {title: 'Gastos', path: '/expenses', icon: 'zmdi zmdi-money-box'},
-      {title: 'Saldos', path: '/balance', icon: 'zmdi zmdi-balance-wallet'}
+      {title: 'Saldos', path: '/balance', icon: 'zmdi zmdi-balance-wallet'},
+      {title: 'Performance', path: '/performance', icon: 'tim-icons icon-chart-pie-36'}
     ]
   }
 ];

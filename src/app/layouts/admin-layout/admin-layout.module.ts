@@ -23,6 +23,7 @@ import {StockComponent} from "../../pages/stock/stock.component";
 import {SaleComponent} from "../../pages/sale/sale.component";
 import {BalanceComponent} from "../../pages/balance/balance.component";
 import {ExpensesComponent} from "../../pages/expenses/expenses.component";
+import {PerformanceComponent} from "../../pages/performance/performance.component";
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import {ExpensesComponent} from "../../pages/expenses/expenses.component";
     SaleComponent,
     BalanceComponent,
     ExpensesComponent,
+    PerformanceComponent,
     DashboardComponent,
     UserComponent,
     TablesComponent,
