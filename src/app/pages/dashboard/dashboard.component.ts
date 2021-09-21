@@ -398,10 +398,15 @@ export class DashboardComponent implements OnInit {
     this.ctx = this.canvas.getContext("2d");
 
     var gradientStroke = this.ctx.createLinearGradient(0, 230, 0, 50);
+    var gradientStroke2 = this.ctx.createLinearGradient(0, 230, 0, 50);
 
     gradientStroke.addColorStop(1, 'rgba(233,32,16,0.2)');
     gradientStroke.addColorStop(0.4, 'rgba(233,32,16,0.0)');
     gradientStroke.addColorStop(0, 'rgba(233,32,16,0)'); //red colors
+
+    gradientStroke2.addColorStop(1, 'rgba(121,132,16,0.2)');
+    gradientStroke2.addColorStop(0.4, 'rgba(121,132,16,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(121,132,16,0)'); //red colors
 
     var config = {
       type: 'line',
