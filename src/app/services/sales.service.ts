@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import {JsonConvert} from 'json2typescript';
 import * as _ from 'lodash';
 import {Sale} from "../models/sale";
+import {Performance} from "../models/performance";
 
 const baseUrl = `${environment.base_url}/sales`;
 const headers: HttpHeaders = new HttpHeaders()
@@ -39,6 +40,25 @@ export class SalesService {
           complete: () => console.log("Sales complete")
         });
     });
+  }
+
+  getPerformance(year: number = undefined, month: number = undefined): Promise<Performance[]> {
+    const url = this.makeUrlByDate(year, month);
+    return new Promise((resolve, reject) => {
+      this.http.get(url + '/performance',  {headers})
+        .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, Performance))))
+        .subscribe({
+          next: items => resolve(items),
+          error: e => reject(e),
+          complete: () => console.log("performances complete")
+        });
+    });
+  }
+
+  private makeUrlByDate(year: number = undefined, month: number = undefined): string {
+    if (!year && !month) return baseUrl;
+    if (year && !month) return baseUrl + '/' + year;
+    return `${baseUrl}/${year}/${month}`;
   }
 
 }

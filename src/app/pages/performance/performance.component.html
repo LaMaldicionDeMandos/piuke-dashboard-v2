@@ -19,16 +19,57 @@
     </div>
   </div>
   <div class=" row">
-    <div class=" col-lg-4">
+    <div class=" col-lg-12">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h5 class=" card-category">Total Shipments</h5>
+          <h5 class=" card-category">Mejores Productos</h5>
           <h3 class=" card-title">
-            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> 763,215
+            <i class="zmdi zmdi-favorite text-danger-states"> </i> {{bestSale | currency}}
           </h3>
         </div>
-        <div class=" card-body">
-          <div class=" chart-area"><canvas id="chartPie"> </canvas></div>
+        <div class=" card-body" style="min-height: 400px">
+          <div class=" row">
+            <div class=" col-md-6">
+              <div class=" chart-area"><canvas id="chartPie"> </canvas></div>
+            </div>
+            <div class="col-md-6">
+              <div class=" table-responsive">
+                <table class=" table tablesorter" id="">
+                  <thead class=" text-primary">
+                  <tr>
+                    <th>#</th>
+                    <th>Titulo</th>
+                    <th class="th-number">Ventas</th>
+                    <th class="th-number">Performance</th>
+                    <th class="th-number">%</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let performance of performances">
+                    <td>
+                      <div class="image-container">
+                        <img class="image-mini rounded-border" style="background-color: {{performance.colorHex}}">
+                        <img src="{{performance.image}}" class="sc-list-item-row-picture__single-item image-mini">
+                      </div>
+                    </td>
+                    <td class="td-name td-large">
+                      <label>{{performance.title}}</label>
+                    </td>
+                    <td class="td-number">
+                      {{performance.count}}
+                    </td>
+                    <td class="td-number">
+                      {{performance.totalProfit | currency}}
+                    </td>
+                    <td class="td-number">
+                      {{100*performance.totalProfit/totalSale | number: '1.1-1'}}%
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
