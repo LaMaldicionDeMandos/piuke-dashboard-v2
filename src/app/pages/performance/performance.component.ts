@@ -73,7 +73,7 @@ export class PerformanceComponent implements OnInit {
 
   updateOptions = () => {
     if (this.myChartData) {
-      this.myChartData.data.datasets[0].data = this.updateData();
+      this.myChartData.data = this.updateData();
       this.myChartData.update();
     } else {
       this.buildChart();
