@@ -24,6 +24,7 @@ import {SaleComponent} from "../../pages/sale/sale.component";
 import {BalanceComponent} from "../../pages/balance/balance.component";
 import {ExpensesComponent} from "../../pages/expenses/expenses.component";
 import {PerformanceComponent} from "../../pages/performance/performance.component";
+import {BestSellerComponent} from "../../pages/bestsellers/bestseller.component";
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import {PerformanceComponent} from "../../pages/performance/performance.componen
     ExpensesComponent,
     PerformanceComponent,
     DashboardComponent,
+    BestSellerComponent,
     UserComponent,
     TablesComponent,
     IconsComponent,

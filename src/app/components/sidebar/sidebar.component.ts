@@ -30,6 +30,14 @@ export const ROUTES: RouteInfo[] = [
       {title: 'Saldos', path: '/balance', icon: 'zmdi zmdi-balance-wallet'},
       {title: 'Performance', path: '/performance', icon: 'tim-icons icon-chart-pie-36'}
     ]
+  },
+  {
+    title: 'Analisis de mercado',
+    icon: "zmdi zmdi-search-in-file",
+    path: "/analist",
+    sub: [
+      {title: 'Best Sellers', path: '/bestsellers', icon: 'tim-icons icon-trophy'},
+    ]
   }
 ];
 

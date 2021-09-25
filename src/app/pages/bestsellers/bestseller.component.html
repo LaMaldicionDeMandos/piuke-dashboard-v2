@@ -1,0 +1,57 @@
+<div class=" content">
+  <h2>Mas Vendidos</h2>
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title" *ngIf="false">Mas vendidos de {{"[CATEGORIA]"}}</h4>
+          <h4 class=" card-title" *ngIf="true">Mas vendidos</h4>
+        </div>
+        <div class=" card-body">
+          <label>Filtrar por categoria</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Mas Vendidos</h4>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+              <tr>
+                <th>#</th>
+                <th>Info</th>
+                <th class="th-number">Vendidos</th>
+                <th class="th-number">Price</th>
+                <th>Desde</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of bestSellers">
+                <td>
+                  <div class="image-container">
+                    <img src="{{item.image}}" class="sc-list-item-row-picture__single-item">
+                  </div>
+                </td>
+                <td class="td-name td-large">
+                  <a [href]="item.permalink">{{item.title}}</a>
+                  <br/>
+                  <small>{{item.sellerId}}</small>
+                </td>
+                <td class="td-number">{{item.sold}}</td>
+                <td class="td-number">{{item.price | currency}}</td>
+                <td class="td-name">{{item.date | date:'dd/MM/YYYY HH:mm'}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
