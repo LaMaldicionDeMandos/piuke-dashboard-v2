@@ -3,6 +3,7 @@ import {startLoadingIndicator, stopLoadingIndicator} from "@btapai/ng-loading-in
 import {BestSellersService} from "../../services/bestsellers.service";
 import {BestSeller} from "../../models/best_seller";
 import * as _ from 'lodash';
+import {Category} from "../../models/category";
 
 @Component({
   selector: "app-bestseller",
@@ -11,15 +12,27 @@ import * as _ from 'lodash';
 })
 export class BestSellerComponent implements OnInit {
   bestSellers: BestSeller[] = [];
+  categories: Category[];
+  currentCategory: Category;
   constructor(private bestsellerService: BestSellersService) {
     this.getBestSellers();
+    this.bestsellerService.categories().then(cats => this.categories = cats);
   }
 
   ngOnInit() {}
 
+  selectCategory(category: Category) {
+    this.currentCategory = category;
+    this.getBestSellers(category);
+  }
+
+  removeCategory() {
+    this.selectCategory(undefined);
+  }
+
   @startLoadingIndicator()
-  getBestSellers() {
-    this.bestsellerService.find()
+  getBestSellers(category: Category = undefined) {
+    this.bestsellerService.find(category)
       .then(items => _.orderBy(items, 'rank'))
       .then(items => this.bestSellers = items)
       .then(() => console.log("No fallo!"))
