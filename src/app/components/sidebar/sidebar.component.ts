@@ -11,9 +11,12 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   {
     path: "/stock",
-    title: "Juguetes",
-    icon: "zmdi zmdi-toys",
-    class: ""
+    title: "Productos",
+    icon: "zmdi zmdi-shape",
+    sub:  [
+      {title: 'Juguetes', path: '/stock', icon: 'zmdi zmdi-toys'},
+      {title: 'Inflación', path: '/competition', icon: 'zmdi zmdi-notifications'},
+    ]
   },
   {
     path: "/sales",

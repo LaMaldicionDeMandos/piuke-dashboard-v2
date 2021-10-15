@@ -25,6 +25,7 @@ import {BalanceComponent} from "../../pages/balance/balance.component";
 import {ExpensesComponent} from "../../pages/expenses/expenses.component";
 import {PerformanceComponent} from "../../pages/performance/performance.component";
 import {BestSellerComponent} from "../../pages/bestsellers/bestseller.component";
+import {PriceAlertsComponent} from "../../pages/price-alrts/price-alerts.component";
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import {BestSellerComponent} from "../../pages/bestsellers/bestseller.component"
   ],
   declarations: [
     StockComponent,
+    PriceAlertsComponent,
     SaleComponent,
     BalanceComponent,
     ExpensesComponent,
