@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import {JsonConvert} from 'json2typescript';
 import {StockProduct} from '../models/stock.product';
 import * as _ from 'lodash';
+import {CompetitionProduct} from "../models/competition.product";
 
 const baseUrl = `${environment.base_url}/products`;
 const headers: HttpHeaders = new HttpHeaders()
@@ -71,6 +72,18 @@ export class ItemsService {
           next: item => resolve(item),
           error: e => reject(e),
           complete: () => console.log("Creation complete")
+        });
+    });
+  }
+
+  getCompetitions(): Promise<CompetitionProduct[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${baseUrl}/competitions`,  {headers})
+        .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, CompetitionProduct))))
+        .subscribe({
+          next: items => resolve(items),
+          error: e => reject(e),
+          complete: () => console.log("COMPETITIONS complete")
         });
     });
   }

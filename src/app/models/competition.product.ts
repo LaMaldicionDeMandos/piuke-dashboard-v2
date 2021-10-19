@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 @JsonObject("Competition")
 export class Competition {
   @JsonProperty('owner_id', String) ownerId: string = undefined;
+  @JsonProperty('item_id', String) itemId: string = undefined;
   @JsonProperty('item_link', String) item_link: number = undefined;
   @JsonProperty('old_price', Number) oldPrice: string = undefined;
   @JsonProperty('new_price', Number) newPrice: string = undefined;
@@ -40,5 +41,10 @@ export class CompetitionProduct {
   get title() {
     if (_.isEmpty(this.meliItems)) return undefined;
     return _.head(this.meliItems).title;
+  }
+
+  get price() {
+    if (_.isEmpty(this.meliItems)) return undefined;
+    return _.head(this.meliItems).price;
   }
 }
