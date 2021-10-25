@@ -3,27 +3,18 @@ import {startLoadingIndicator, stopLoadingIndicator} from "@btapai/ng-loading-in
 import {ItemsService} from "../../services/items.service";
 import {CompetitionProduct} from "../../models/competition.product";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import * as _ from 'lodash';
 
 @Component({
   selector: "app-price-alerts",
   templateUrl: "price-alerts.component.html",
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./price-alerts.component.scss'],
-  styles: [`
-    .dark-modal .modal-content {
-      background-color: #292b2c;
-      color: white;
-    }
-    .dark-modal .close {
-      color: white;
-    }
-    .light-blue-backdrop {
-      background-color: #5cb3fd;
-    }
-  `]
 })
 export class PriceAlertsComponent implements OnInit {
-  items: CompetitionProduct[];
+  items: any[];
+  alerts: CompetitionProduct[];
+  currentItem: CompetitionProduct;
 
   closeResult = '';
   constructor(private itemsService: ItemsService, private modalService: NgbModal) {
@@ -35,7 +26,9 @@ export class PriceAlertsComponent implements OnInit {
   @startLoadingIndicator()
   getCompetitions() {
     this.itemsService.getCompetitions()
+      .then(items => _.map(items, item => _.assign(item, {isCollapsed: true})))
       .then(items => this.items = items)
+      .then(items => this.alerts = _.filter(items, this.filterAlerts))
       .then(this.triggerLoadingIndicatorStop)
       .catch(this.triggerLoadingIndicatorStop)
   }
@@ -49,12 +42,32 @@ export class PriceAlertsComponent implements OnInit {
     alert(text);
   }
 
-  open(content) {
+  open(content, item: CompetitionProduct) {
+    this.currentItem = item;
     this.modalService.open(content, {modalDialogClass: 'dark-modal'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+      this.closeResult = `Closed with: ${JSON.stringify(result)}`;
+      console.log(this.closeResult);
+      this.addNewCompetition(result);
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult);
     });
+  }
+
+  toggleItem(item) {
+    item.isCollapsed = !item.isCollapsed;
+  }
+
+  private filterAlerts(item: CompetitionProduct): boolean {
+    return _.some(item.competitions, comp => comp.newPrice !==  comp.oldPrice);
+  }
+
+  private async addNewCompetition(competitionData) {
+    console.log(`Nuew competition to ${this.currentItem.code} -> ${JSON.stringify(competitionData)}`);
+    const newItem = await this.itemsService.newCompetitions(this.currentItem, competitionData.owner_id, competitionData.item_id);
+    this.currentItem = undefined;
+    const item = _.find(this.items, item => item.code === newItem.code);
+    if (item) item.competitions = newItem.competitions;
   }
 
   private getDismissReason(reason: any): string {

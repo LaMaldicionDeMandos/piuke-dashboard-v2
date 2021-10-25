@@ -3,25 +3,75 @@
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title">Nueva competencia</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+      <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="modal.dismiss('Cross click')"><i class="zmdi zmdi-close"></i></button>
     </div>
     <div class="modal-body">
       <form>
         <div class="form-group">
           <label for="owner_id">ID del Vendedor</label>
-          <input id="owner_id" class="form-control" name="oid">
+          <input id="owner_id" #ownerValue class="form-control" name="oid">
           <label for="meli_id">ID del item</label>
-          <input id="meli_id" class="form-control" name="id">
+          <input id="meli_id" #itemIdValue class="form-control" name="id">
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Agregar</button>
+      <button class=" btn btn-fill btn-info" (click)="modal.close({owner_id: ownerValue.value, item_id: itemIdValue.value})">Agregar</button>
     </div>
   </ng-template>
   <h2>Alerta de Precios</h2>
+  <div class=" row">
+    <div class=" col-md-4" *ngFor="let item of alerts">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="card-title alert">
+            <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
+            <h4 class="alert-title">{{item.title}}</h4>
+          </div>
+        </div>
+        <div class=" card-body">
+          <table class="table tablesorter">
+            <thead class=" text-primary">
+            <tr>
+              <th>#</th>
+              <th>Competencia</th>
+              <th class="th-number">Viejo Precio</th>
+              <th class="th-number">Nuevo Precio</th>
+              <th class="th-number">Relación</th>
+              <th>Acción</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comp of item.competitions">
+                <td class="form-check">
+                  <div class=" form-check">
+                    <label class=" form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        readonly
+                        [(ngModel)]="comp.checked"
+                      />
+                      <span class=" form-check-sign">
+                          <span class=" check"> </span>
+                        </span>
+                    </label>
+                  </div>
+                </td>
+                <td>{{comp.ownerId}}</td>
+                <td class="td-number">{{comp.oldPrice | currency}}</td>
+                <td class="td-number">{{comp.newPrice | currency}}</td>
+                <td class="td-number">{{comp.relation | number:'1.0-2'}}</td>
+                <td class="action">
+                  <button class="btn-sm btn-link btn-icon btn-simple btn-success"><i class="zmdi zmdi-refresh-alt action-icon"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class=" row">
     <div class=" col-md-12">
       <div class=" card">
@@ -41,25 +91,44 @@
               </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of items">
-                  <td>
-                      <div class="image-container">
-                        <button class="btn-sm btn-link btn-icon btn-simple btn-success"><i class="zmdi zmdi-chevron-down"></i></button>
-                        <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
-                      </div>
-                  </td>
-                  <td class="td-name td-large">
-                    <label>{{item.title}}</label>
-                    <br/>
-                    <small>{{item.code}}</small>
-                  </td>
-                  <td class="td-number">{{item.cost | currency}}</td>
-                  <td class="td-number">{{item.price | currency}}</td>
-                  <td>
-                    <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="open(content)"><i class="zmdi zmdi-plus-circle-o"></i></button>
-                    <button class="btn-sm btn-link btn-icon btn-simple btn-success"><i class="zmdi zmdi-refresh-alt action-icon"></i></button>
-                  </td>
-                </tr>
+                <ng-container *ngFor="let item of items">
+                  <tr>
+                    <td>
+                        <div class="image-container">
+                          <button *ngIf="item.competitions && item.competitions.length > 0"
+                                  (click)="collapse.toggle()" [attr.aria-expanded]="!item.isCollapsed" aria-controls="collapseItem"
+                                  class="btn-sm btn-link btn-icon btn-simple btn-success">
+                            <i [class.zmdi-chevron-down]="item.isCollapsed" [class.zmdi-chevron-up]="!item.isCollapsed" class="zmdi"></i>
+                          </button>
+                          <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
+                        </div>
+                    </td>
+                    <td class="td-name td-large">
+                      <label>{{item.title}}</label>
+                      <br/>
+                      <small>{{item.code}}</small>
+                    </td>
+                    <td class="td-number">{{item.cost | currency}}</td>
+                    <td class="td-number">{{item.price | currency}}</td>
+                    <td>
+                      <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="open(content, item)"><i class="zmdi zmdi-plus-circle-o"></i></button>
+                      <button class="btn-sm btn-link btn-icon btn-simple btn-success"><i class="zmdi zmdi-refresh-alt action-icon"></i></button>
+                    </td>
+                  </tr>
+                  <tr #collapse="ngbCollapse" [(ngbCollapse)]="item.isCollapsed">
+                    <td colspan="5" style="padding-left: 4rem">
+                      <table class=" table tablesorter">
+                        <tbody>
+                          <tr *ngFor="let comp of item.competitions">
+                            <td>{{comp.ownerId}}</td>
+                            <td><a [href]="comp.itemLink">{{comp.itemLink}}</a></td>
+                            <td>{{comp.newPrice | currency}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>

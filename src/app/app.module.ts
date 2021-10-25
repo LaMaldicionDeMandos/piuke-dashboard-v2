@@ -21,10 +21,12 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {ExpensesService} from "./services/expenses.service";
 import {BalanceService} from "./services/balance.service";
 import {BestSellersService} from "./services/bestsellers.service";
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   imports: [
     CommonModule,
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,

@@ -5,11 +5,16 @@ import * as _ from 'lodash';
 export class Competition {
   @JsonProperty('owner_id', String) ownerId: string = undefined;
   @JsonProperty('item_id', String) itemId: string = undefined;
-  @JsonProperty('item_link', String) item_link: number = undefined;
-  @JsonProperty('old_price', Number) oldPrice: string = undefined;
-  @JsonProperty('new_price', Number) newPrice: string = undefined;
+  @JsonProperty('item_link', String) itemLink: number = undefined;
+  @JsonProperty('old_price', Number) oldPrice: number = undefined;
+  @JsonProperty('new_price', Number) newPrice: number = undefined;
+  @JsonProperty('checked', Boolean, true) checked: boolean = undefined;
 
   constructor() { }
+
+  get relation(): number {
+    return this.newPrice/this.oldPrice;
+  }
 
 }
 
@@ -29,7 +34,7 @@ export class CompetitionProduct {
   @JsonProperty('cost', Number) cost: number = undefined;
   @JsonProperty('code', String) code: string = undefined;
   @JsonProperty('meli_items', [CompetitionMeliProduct], true) meliItems: CompetitionMeliProduct[] = [];
-  @JsonProperty('competitions', [Competition], true) competitions: Competition[] = [];
+  @JsonProperty('product_comparations', [Competition], true) competitions: Competition[] = [];
 
   constructor() { }
 

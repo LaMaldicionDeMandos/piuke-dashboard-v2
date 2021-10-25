@@ -87,4 +87,16 @@ export class ItemsService {
         });
     });
   }
+
+  newCompetitions(item: CompetitionProduct, ownerId: string, itemId: string): Promise<CompetitionProduct> {
+    return new Promise((resolve, reject) => {
+      this.http.post(`${baseUrl}/${item.code}/competitions`, {owner_id: ownerId, item_id: itemId},  {headers})
+        .pipe(map(item => jsonConvert.deserializeObject(item, CompetitionProduct)))
+        .subscribe({
+          next: item => resolve(item),
+          error: e => reject(e),
+          complete: () => console.log("ADD COMPETITION complete")
+        });
+    });
+  }
 }

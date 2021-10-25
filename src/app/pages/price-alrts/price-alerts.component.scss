@@ -61,9 +61,40 @@ td {
 }
 
 .dark-modal .modal-content {
-  background-color: #292b2c;
+  background-color: #27293d;
   color: white;
+}
+
+.dark-modal .modal-title {
+  color: white !important;
 }
 .dark-modal .close {
   color: white;
+}
+
+.card-title.alert {
+  display: flex;
+}
+
+.card-title {
+  img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.alert-title {
+  margin-left: 20px;
+}
+
+.table .form-check {
+  margin-top: 0 !important;
+}
+
+td.form-check {
+  min-width: 0px !important;
+}
+
+td.action {
+  min-width: 0px !important;
 }
