@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import {JsonConvert} from 'json2typescript';
 import {StockProduct} from '../models/stock.product';
 import * as _ from 'lodash';
-import {CompetitionProduct} from "../models/competition.product";
+import {Competition, CompetitionProduct} from "../models/competition.product";
 
 const baseUrl = `${environment.base_url}/products`;
 const headers: HttpHeaders = new HttpHeaders()
@@ -96,6 +96,30 @@ export class ItemsService {
           next: item => resolve(item),
           error: e => reject(e),
           complete: () => console.log("ADD COMPETITION complete")
+        });
+    });
+  }
+
+  updateCompetition(item: CompetitionProduct, comp: Competition): Promise<CompetitionProduct> {
+    return new Promise((resolve, reject) => {
+      this.http.put(`${baseUrl}/${item.code}/competitions/${comp.ownerId}/${comp.itemId}`, comp,  {headers})
+        .pipe(map(item => jsonConvert.deserializeObject(item, CompetitionProduct)))
+        .subscribe({
+          next: item => resolve(item),
+          error: e => reject(e),
+          complete: () => console.log("update COMPETITION complete")
+        });
+    });
+  }
+
+  syncItemCompetitions(item: CompetitionProduct): Promise<CompetitionProduct> {
+    return new Promise((resolve, reject) => {
+      this.http.get(`${baseUrl}/${item.code}/competitions/sync`,  {headers})
+        .pipe(map(item => jsonConvert.deserializeObject(item, CompetitionProduct)))
+        .subscribe({
+          next: item => resolve(item),
+          error: e => reject(e),
+          complete: () => console.log("sync COMPETITIONS complete")
         });
     });
   }

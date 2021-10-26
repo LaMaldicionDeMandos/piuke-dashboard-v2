@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {startLoadingIndicator, stopLoadingIndicator} from "@btapai/ng-loading-indicator";
 import {ItemsService} from "../../services/items.service";
-import {CompetitionProduct} from "../../models/competition.product";
+import {Competition, CompetitionProduct} from "../../models/competition.product";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import * as _ from 'lodash';
 
@@ -56,6 +56,17 @@ export class PriceAlertsComponent implements OnInit {
 
   toggleItem(item) {
     item.isCollapsed = !item.isCollapsed;
+  }
+
+  checkCompetitionUpdate(item: CompetitionProduct, comp: Competition) {
+    const allChecked = _.every(item.competitions, {checked: true});
+    const promise = allChecked ? this.itemsService.syncItemCompetitions(item) : this.itemsService.updateCompetition(item, comp)
+    promise.then(this.updateCompetition);
+  }
+
+  private updateCompetition = (item: CompetitionProduct) => {
+    const index = _.findIndex(this.items, (it) => it.id === item.id);
+    this.items.splice(index, 1, item);
   }
 
   private filterAlerts(item: CompetitionProduct): boolean {
