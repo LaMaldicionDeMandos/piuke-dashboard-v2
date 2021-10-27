@@ -102,7 +102,7 @@ export class ItemsService {
 
   updateCompetition(item: CompetitionProduct, comp: Competition): Promise<CompetitionProduct> {
     return new Promise((resolve, reject) => {
-      this.http.put(`${baseUrl}/${item.code}/competitions/${comp.ownerId}/${comp.itemId}`, comp,  {headers})
+      this.http.put(`${baseUrl}/${item.code}/competitions`, jsonConvert.serializeObject(comp),  {headers})
         .pipe(map(item => jsonConvert.deserializeObject(item, CompetitionProduct)))
         .subscribe({
           next: item => resolve(item),
@@ -114,7 +114,7 @@ export class ItemsService {
 
   syncItemCompetitions(item: CompetitionProduct): Promise<CompetitionProduct> {
     return new Promise((resolve, reject) => {
-      this.http.get(`${baseUrl}/${item.code}/competitions/sync`,  {headers})
+      this.http.post(`${baseUrl}/${item.code}/competitions/sync`,  {},{headers})
         .pipe(map(item => jsonConvert.deserializeObject(item, CompetitionProduct)))
         .subscribe({
           next: item => resolve(item),

@@ -60,13 +60,18 @@ export class PriceAlertsComponent implements OnInit {
 
   checkCompetitionUpdate(item: CompetitionProduct, comp: Competition) {
     const allChecked = _.every(item.competitions, {checked: true});
-    const promise = allChecked ? this.itemsService.syncItemCompetitions(item) : this.itemsService.updateCompetition(item, comp)
+    const promise = allChecked ? this.itemsService.syncItemCompetitions(item) : this.itemsService.updateCompetition(item, comp);
     promise.then(this.updateCompetition);
+  }
+
+  syncCompetitions(item: CompetitionProduct) {
+    this.itemsService.syncItemCompetitions(item).then(this.updateCompetition);
   }
 
   private updateCompetition = (item: CompetitionProduct) => {
     const index = _.findIndex(this.items, (it) => it.id === item.id);
     this.items.splice(index, 1, item);
+    this.alerts = _.filter(this.items, this.filterAlerts);
   }
 
   private filterAlerts(item: CompetitionProduct): boolean {

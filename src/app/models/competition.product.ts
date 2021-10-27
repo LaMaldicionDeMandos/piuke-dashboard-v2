@@ -3,11 +3,11 @@ import * as _ from 'lodash';
 
 @JsonObject("Competition")
 export class Competition {
-  @JsonProperty('owner_id', String) ownerId: string = undefined;
-  @JsonProperty('item_id', String) itemId: string = undefined;
-  @JsonProperty('item_link', String) itemLink: number = undefined;
-  @JsonProperty('old_price', Number) oldPrice: number = undefined;
-  @JsonProperty('new_price', Number) newPrice: number = undefined;
+  @JsonProperty('ownerId', String) ownerId: string = undefined;
+  @JsonProperty('itemId', String) itemId: string = undefined;
+  @JsonProperty('itemLink', String) itemLink: number = undefined;
+  @JsonProperty('oldPrice', Number) oldPrice: number = undefined;
+  @JsonProperty('newPrice', Number) newPrice: number = undefined;
   @JsonProperty('checked', Boolean, true) checked: boolean = undefined;
 
   constructor() { }

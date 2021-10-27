@@ -21,12 +21,19 @@
   </ng-template>
   <h2>Alerta de Precios</h2>
   <div class=" row">
-    <div class=" col-md-4" *ngFor="let item of alerts">
+    <div class=" col-md-6" *ngFor="let item of alerts">
       <div class=" card">
         <div class=" card-header">
-          <div class="card-title alert">
-            <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
-            <h4 class="alert-title">{{item.title}}</h4>
+          <div class="row">
+            <div class="card-title alert col-md-10">
+              <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
+              <h4 class="alert-title">{{item.title}}</h4>
+            </div>
+            <div class="col-md-2">
+              <h3 class=" card-title">
+                <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="syncCompetitions(item)"><i class="zmdi zmdi-refresh-alt action-icon"></i></button>
+              </h3>
+            </div>
           </div>
         </div>
         <div class=" card-body">
@@ -108,7 +115,7 @@
                     <td class="td-number">{{item.price | currency}}</td>
                     <td>
                       <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="open(content, item)"><i class="zmdi zmdi-plus-circle-o"></i></button>
-                      <button class="btn-sm btn-link btn-icon btn-simple btn-success"><i class="zmdi zmdi-refresh-alt action-icon"></i></button>
+                      <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="syncCompetitions(item)"><i class="zmdi zmdi-refresh-alt action-icon"></i></button>
                     </td>
                   </tr>
                   <tr #collapse="ngbCollapse" [(ngbCollapse)]="item.isCollapsed">
