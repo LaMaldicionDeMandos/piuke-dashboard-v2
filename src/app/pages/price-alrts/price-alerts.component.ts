@@ -75,7 +75,7 @@ export class PriceAlertsComponent implements OnInit {
   }
 
   private filterAlerts(item: CompetitionProduct): boolean {
-    return _.some(item.competitions, comp => comp.newPrice !==  comp.oldPrice);
+    return _.some(item.competitions, comp => comp.newPrice !== comp.oldPrice);
   }
 
   private async addNewCompetition(competitionData) {

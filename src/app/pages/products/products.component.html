@@ -1,0 +1,136 @@
+
+<div class=" content">
+  <h2>Jueguetes</h2>
+  <div class="row">
+    <div class="col-sm-12">
+      <button class=" btn btn-fill btn-primary float-right" (click)="newProduct()">Nuevo</button>
+    </div>
+  </div>
+
+  <div class=" row" [hidden]="!showNewItemForm">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Nuevo Producto</h4>
+        </div>
+        <div class=" card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <label>Código</label>
+              <div class="form-group">
+                <input class="form-control" [(ngModel)]="newItem.code">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label>Costo</label>
+              <div class="form-group">
+                <input class="form-control" type="number" [(ngModel)]="newItem.cost">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=" card-footer">
+          <button class=" btn btn-fill btn-info" (click)="save()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header">
+          <h4 class=" card-title">Stock</h4>
+          <div ngbDropdown>
+            <button class="btn btn-link" data-toggle="dropdown" ngbDropdownToggle type="button">
+              <i class=" zmdi zmdi-sort-amount-desc"></i><label>Ordenar por: {{currentSorter?.label}}</label>
+            </button>
+            <div aria-labelledby="dropdownMenuLink" class=" dropdown-menu-left" ngbDropdownMenu>
+              <a href="javascript:void(0)" ngbDropdownItem *ngFor="let sorter of sorters" (click)="sort(sorter)">{{sorter.label}}</a>
+            </div>
+          </div>
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>#</th>
+                  <th>Info</th>
+                  <th class="th-number">Stock</th>
+                  <th>Costo</th>
+                  <th>Precio</th>
+                  <th>Beneficio</th>
+                  <th>Estado</th>
+                  <th>Calidad</th>
+                  <th class="th-number">Ventas</th>
+                  <th class="th-number">Preguntas</th>
+                  <th class="th-number">Visitas</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of items">
+                  <td>
+                    <div class="image-container">
+                      <img src="{{item.thumbnail}}" class="sc-list-item-row-picture__single-item">
+                    </div>
+                  </td>
+                  <td class="td-name td-large">
+                    <label>{{item.title}}</label>
+                    <br/>
+                    <small>{{item.code}}</small>
+                  </td>
+                  <td class="td-number">{{item.stock}}</td>
+                  <td class="td-number td-large">
+                    <div [ngSwitch]="item.changeCost">
+                      <span *ngSwitchCase="undefined">
+                        <span >{{item.cost | currency}}</span>
+                        <button class="btn-sm btn-link btn-icon btn-simple btn-simple-link btn-success" (click)="changeCost(item)">
+                          <i class=" tim-icons icon-pencil"></i>
+                        </button>
+                      </span>
+                      <input *ngSwitchCase="true" style="max-width: 92px" class="form-control" type="number" [(ngModel)]="item.cost" (keyup.enter)="doChangeCost(item)">
+                    </div>
+                  </td>
+                  <td class="td-number">
+                    <div>
+                      <div class="row" *ngFor="let meliItem of item.meliItems">
+                        <!--<embed src="assets/img/cup.svg" class="ui-search-icon ui-search-icon-loyalty"/>-->
+                        {{meliItem.price | currency}}</div>
+                    </div>
+                  </td>
+                  <td class="td-large td-center">
+                    <div>
+                      <div class="row td-center" *ngFor="let meliItem of item.meliItems" [ngSwitch]="meliItem.listingType">
+                        <span *ngSwitchCase="'gold_pro'">
+                          <i class=" tim-icons icon-credit-card" style="margin-right: 5px"> </i>
+                          <span class="little-text" >Cuotas sin Interes</span>
+                        </span>
+                        <span *ngSwitchCase="'gold_special'">
+                          <span class="little-text">Normal</span>
+                        </span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="td-center">
+                    <div class="row" *ngFor="let meliItem of item.meliItems">{{meliItem.status}}</div>
+                  </td>
+                  <td class="td-center">
+                    <span class="success">{{item.health*100}}%</span>
+                  </td>
+                  <td class="td-number">{{item.sales}}</td>
+                  <td class="td-number">{{item.questions}}</td>
+                  <td class="td-number">{{item.visits}}</td>
+                  <td>
+                    <button class="btn-sm btn-link btn-icon btn-simple btn-success" (click)="syncItem(item)"><i class=" zmdi zmdi-refresh-alt action-icon"></i></button>
+                    <button class="btn-sm btn-danger btn-link btn-icon btn-simple" (click)="deleteProduct(item)"><i class=" tim-icons icon-trash-simple"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

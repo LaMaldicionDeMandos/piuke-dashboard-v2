@@ -6,6 +6,7 @@ import {JsonConvert} from 'json2typescript';
 import {StockProduct} from '../models/stock.product';
 import * as _ from 'lodash';
 import {Competition, CompetitionProduct} from "../models/competition.product";
+import {Stock} from "../models/stock";
 
 const baseUrl = `${environment.base_url}/products`;
 const headers: HttpHeaders = new HttpHeaders()
@@ -30,10 +31,22 @@ export class ItemsService {
     });
   }
 
-  getStock(): Promise<StockProduct[]> {
+  getProducts(): Promise<StockProduct[]> {
     return new Promise((resolve, reject) => {
       this.http.get(baseUrl,  {headers})
         .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, StockProduct))))
+        .subscribe({
+          next: items => resolve(items),
+          error: e => reject(e),
+          complete: () => console.log("Products complete")
+        });
+    });
+  }
+
+  getStock(): Promise<Stock[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get(baseUrl + '/stock',  {headers})
+        .pipe(map(items => _.map(items, item => jsonConvert.deserializeObject(item, Stock))))
         .subscribe({
           next: items => resolve(items),
           error: e => reject(e),

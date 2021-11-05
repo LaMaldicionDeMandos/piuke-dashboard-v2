@@ -14,7 +14,8 @@ export const ROUTES: RouteInfo[] = [
     title: "Productos",
     icon: "zmdi zmdi-shape",
     sub:  [
-      {title: 'Juguetes', path: '/stock', icon: 'zmdi zmdi-toys'},
+      {title: 'Juguetes', path: '/products', icon: 'zmdi zmdi-toys'},
+      {title: 'Stock', path: '/stock', icon: 'zmdi zmdi-widgets'},
       {title: 'Inflación', path: '/competition', icon: 'zmdi zmdi-notifications'},
     ]
   },

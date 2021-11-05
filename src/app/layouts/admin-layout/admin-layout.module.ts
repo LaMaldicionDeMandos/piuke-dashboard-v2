@@ -19,13 +19,16 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatFormFieldModule} from "@angular/material/form-field";
 
-import {StockComponent} from "../../pages/stock/stock.component";
+import {ProductsComponent} from "../../pages/products/products.component";
 import {SaleComponent} from "../../pages/sale/sale.component";
 import {BalanceComponent} from "../../pages/balance/balance.component";
 import {ExpensesComponent} from "../../pages/expenses/expenses.component";
 import {PerformanceComponent} from "../../pages/performance/performance.component";
 import {BestSellerComponent} from "../../pages/bestsellers/bestseller.component";
 import {PriceAlertsComponent} from "../../pages/price-alrts/price-alerts.component";
+import {StockComponent} from "../../pages/stock/stock.component";
+import {StockPercentDirective} from "../../directives/stock-percent.directive";
+import {StockDangerDirective} from "../../directives/stock-danger.directive";
 
 @NgModule({
   imports: [
@@ -39,6 +42,7 @@ import {PriceAlertsComponent} from "../../pages/price-alrts/price-alerts.compone
     MatDatepickerModule
   ],
   declarations: [
+    ProductsComponent,
     StockComponent,
     PriceAlertsComponent,
     SaleComponent,
@@ -52,7 +56,9 @@ import {PriceAlertsComponent} from "../../pages/price-alrts/price-alerts.compone
     IconsComponent,
     TypographyComponent,
     NotificationsComponent,
-    MapComponent
+    MapComponent,
+    StockPercentDirective,
+    StockDangerDirective
     // RtlComponent
   ],
   providers: [
